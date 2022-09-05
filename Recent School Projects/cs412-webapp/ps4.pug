@@ -1,0 +1,32 @@
+doctype html
+title  APISearch
+h1 Definitely not op.gg
+form(method='post' action='/ps4/promise')
+    label Search by promises:
+    input(type='text' name='search' placeholder='summoner name...')
+    br
+    input(type='submit' value='submit')
+
+form(method='post' action='/ps4/async')
+    label Search by async/await:
+    input(type='text' name='search' placeholder='summoner name...')
+    br
+    input(type='submit' value='submit')
+
+form(method='post' action='/ps4/callback')
+    label Search by callback:
+    input(type='text' name='search' placeholder='summoner name...')
+    br
+    input(type='submit' value='submit')
+
+if sval
+    if sval == "ERROR WITH SEARCH"
+        p Unfortunate error with search
+    else if sval[0] == null
+        h2 Couldn't find summoner
+    else
+        h2 Summoner name: #{sval[1]}
+        h2 Summoner level: #{sval[0]}
+        h2 Summoner icon:
+        img(src = sval[2] alt = "Missing")
+
