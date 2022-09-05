@@ -1,0 +1,64 @@
+<!doctype html>
+<title> Photoshare</title>
+{% if albums %}
+<label for="album">Choose one of your albums:</label>
+<form method="post" enctype="multipart/form-data" action="/yourphotos">
+  <select name="album" id="album" value="new">
+      <option>All albums</option>
+    
+      {% for album in albums %}
+          <option value="{{album}}">{{album}}</option>
+      {% endfor %}
+  </select>
+  <p></p>
+  <label for="tagsearch">Search by tag:</label>
+    
+    <input type="tagsearch" name="tagsearch" placeholder="tag1,tag2,tag3..."/><br />
+    <input type="submit" value="search" />
+    
+  
+</form>
+{% endif %}
+
+
+{% if albums %}
+<label for="albumdel">Delete one of your albums:</label>
+<form action="{{url_for('delete_album')}}" method="post">
+    
+    <select name="albumdel" id="albumdel" value="new">
+      <option>-</option>
+      {% for album in albums %}
+          <option value="{{album}}">{{album}}</option>
+      {% endfor %}
+  </select>
+  <button type="submit" name="deleteButtonAlbum">delete</button>
+</form>
+{% endif %}
+
+
+
+{% if photos %}
+<h2>Here are your photos</h2>
+    <ul>
+    {% for photo in photos %}
+
+        <li>{{photo[2]}}<br>
+        <img src='data:image/jpg;base64, {{ base64.b64encode(photo[0]).decode("ascii") }}'/></li>
+        <form action="{{url_for('delete_photo')}}" method="post">
+          <button type="submit" name="deleteButton" value={{photo[1]}}>Delete this photo</button>
+        </form>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+
+
+
+
+<ul>
+    <li><a href='/profile'>Profile</a> </li>
+    <li><a href='/users'>Find users</a> </li>
+    <li><a href='/upload'>Upload a photo</a> </li>
+    <li><a href='/logout'>Logout</a></li>
+    <li><a href='/'>Home</a></li>
+</ul>

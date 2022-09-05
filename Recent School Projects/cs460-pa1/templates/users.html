@@ -1,0 +1,38 @@
+<!-- author ben lawson (balawson@bu.edu) -->
+<!doctype html>
+<title> Photoshare</title>
+<ul>
+  <li><a href='/upload'>Upload a photo</a> </li>
+  <li><a href='/users'>Find users</a> </li>
+  {% if message is not none %}
+  <li><a href='/friends'>View friends list</a> </li>
+  <li><a href='/logout'>Logout</a></li>
+  {% endif %}
+  <li><a href='/'>Home</a></li>
+  </ul>
+<h1> Users:</h1>
+<p>Click on a name to add a friend!</p>
+
+{% for your_list_element in userslist %}
+      <p>
+        <form method="post" action="{{ url_for('add_friend') }}">
+          <input id='{{ your_list_element }}' type='submit' name = addfriend    value = '{{ your_list_element }}'>
+      </form>
+    </p>
+  {% endfor %}
+
+<h2> Reccomended list: </h2>
+{% for rec_list_element in recList %}
+    <p>
+      {{rec_list_element}}
+    </p>
+  {% endfor %}
+
+<h3> Top Contributers: </h3>
+{% for top_list_element in topList %}
+    <p>
+      {{top_list_element[0]}} {{top_list_element[1]}} 
+    </p>
+  {% endfor %}
+
+  

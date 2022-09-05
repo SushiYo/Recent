@@ -1,0 +1,34 @@
+<!-- author ben lawson (balawson@bu.edu) -->
+<!doctype html>
+<title> Search Comments</title>
+<ul>
+  <li><a href='/upload'>Upload a photo</a> </li>
+  <li><a href='/users'>Find users</a> </li>
+  {% if message is not none %}
+  <li><a href='/friends'>View friends list</a> </li>
+  <li><a href='/logout'>Logout</a></li>
+  {% endif %}
+  <li><a href='/'>Home</a></li>
+  </ul>
+
+
+
+
+  <form method="post" enctype="multipart/form-data" action="/commentsearch">
+    <label for="comsearch">Search by comment:</label>
+      
+      <input type="comsearch" name="comsearch" placeholder="comment..."/><br />
+      <input type="submit" value="search" />
+
+  </form>
+<h2> User list: </h2>
+{% for user_list_element in userList %}
+    <p>
+      {{user_list_element}}
+    </p>
+{% endfor %}
+
+  
+
+
+  

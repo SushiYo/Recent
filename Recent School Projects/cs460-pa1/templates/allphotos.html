@@ -1,0 +1,85 @@
+<!doctype html>
+<title> Photoshare</title>
+
+<ul>
+    <li><a href='/profile'>Profile</a> </li>
+    <li><a href='/users'>Find users</a> </li>
+    <li><a href='/upload'>Upload a photo</a> </li>
+    <li><a href='/logout'>Logout</a></li>
+    <li><a href='/'>Home</a></li>
+</ul>
+
+
+
+{% if albums %}
+<label for="album">Choose an albums:</label>
+<form method="post" enctype="multipart/form-data" action="/allphotos">
+  <select name="album" id="album" value="new">
+      <option>All albums</option>
+    
+      {% for album in albums %}
+          <option value="{{album}}">{{album}}</option>
+      {% endfor %}
+  </select>
+  <p></p>
+  <label for="tagsearch">Search by tag:</label>
+    
+    <input type="tagsearch" name="tagsearch" placeholder="tag1,tag2,tag3..."/><br />
+    <input type="submit" value="search" />
+  <h3>Top Tags</h3>
+  {% for tag_list_element in tagList %}
+    <p>
+      <button name = "tagbutton" value = {{tag_list_element}} >{{tag_list_element}}</button>
+    </p>
+  {% endfor %}
+
+</form>
+{% endif %}
+
+
+
+{% if photos %}
+<h2>Photos</h2>
+    <ul>
+    {% for photo in photos %}
+        
+        <li>By {{photo[3]}} {{photo[4]}}: {{photo[2]}}<br>
+        <img src='data:image/jpg;base64, {{ base64.b64encode(photo[0]).decode("ascii") }}'/></li>
+        <p>Likes: {{likecount(photo[1])}}
+          <form method="post" enctype="multipart/form-data" action="/allphotos">
+            <button name = "like" value = {{photo[1]}}> Like </button>
+          </form>
+        </p>
+        <form method="post" action="{{ url_for('all_photos') }}">
+          <label for="comment">Leave a comment:</label>
+          <input type="comment" name="comment" /><br />
+          <button name = "submitcomment" value = {{photo[1]}}> comment </button>
+      </form>
+        
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% if rec_photos %}
+<h3> Here are some reccomended photos</h3>
+    <ul>
+    {% for photo in rec_photos%}       
+        <li>Reccomended: {{photo[2]}}<br>
+        <img src='data:image/jpg;base64, {{ base64.b64encode(photo[0]).decode("ascii") }}'/></li>
+        <p>Likes: {{likecount(photo[1])}}
+          <form method="post" enctype="multipart/form-data" action="/allphotos">
+            <button name = "like" value = {{photo[1]}}> Like </button>
+          </form>
+        </p>
+        <form method="post" action="{{ url_for('all_photos') }}">
+          <label for="comment">Leave a comment:</label>
+          <input type="comment" name="comment" /><br />
+          <button name = "submitcomment" value = {{photo[1]}}> comment </button>
+      </form>
+        
+    {% endfor %}
+    </ul>
+{% endif %}
+
+
+
