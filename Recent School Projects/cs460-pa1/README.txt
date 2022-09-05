@@ -1,3 +1,23 @@
+Webapp database project created by Jahyung Yun, and Dan Zhou. Flask python server code adapted from class starter code. 
+Functionalities implemented:
+- Becoming a registered user
+- Adding and Listing Friends
+- User activity (top 10)
+- Photo and album browsing
+- Photo and album creating
+- Viewing your photos by tag name
+- Viewing all photos by tag name
+- Viewing the most popular tags
+- Photo search
+- Leaving comments
+- Like functionality
+- Search on comments
+- Friend recommendation
+- 'You-may-also-like' functionality
+
+- All database sql construction queries
+- HTML pages
+
 To get the skeleton running, open a terminal and do the following:
 	1. enter the skeleton folder 'cd path/to/skeleton'
 	2. install all necessary packages 'pip install -r requirements.txt' (or use pip3)
